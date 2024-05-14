@@ -1,0 +1,72 @@
+.pill-case {
+  width: 400px;
+  height: 80px;
+  background-color: #700;
+  position: relative;
+  border-radius: 5px;
+  display: flex;
+}
+
+.compartment:nth-last-child(2) {
+  border-right: none;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.compartment {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  font-family: sans-serif;
+  border-top: 6px solid #800;
+  border-bottom: 6px solid #800;
+  box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.5); /* Example inset shadow */
+}
+
+.compartment:first-child {
+  border-left: 5px solid #800; /* Add left border to only the first compartment */
+  border-top-left-radius: 5px; /* Round the top-right corner */
+  border-bottom-left-radius: 5px; /* Round the bottom-right corner */
+}
+
+/* Add right border to all but last compartment */
+.compartment:not(:nth-last-child(1)) {
+  border-right: 4px solid #800;
+}
+
+.compartment::before {
+  content: attr(id);
+  color: #bbb;
+  transform: rotate(-90deg);
+  font-size: 18px;
+  position: absolute;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.lid {
+  width: 400px;
+  height: 100%;
+  background-color: darkred;
+  position: absolute;
+  border-radius: 5px;
+  cursor: pointer;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2; /* Ensure the lid covers the compartments */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.dev/svgjs' viewBox='0 0 700 700' width='700' height='700' opacity='0.2'><defs><filter id='nnnoise-filter' x='-20%' y='-20%' width='140%' height='140%' filterUnits='objectBoundingBox' primitiveUnits='userSpaceOnUse' color-interpolation-filters='linearRGB'><feTurbulence type='fractalNoise' baseFrequency='0.101' numOctaves='4' seed='15' stitchTiles='stitch' x='0%' y='0%' width='100%' height='100%' result='turbulence'></feTurbulence><feSpecularLighting surfaceScale='10' specularConstant='1.2' specularExponent='20' lighting-color='%23ff0000' x='0%' y='0%' width='100%' height='100%' in='turbulence' result='specularLighting'><feDistantLight azimuth='3' elevation='112'></feDistantLight></feSpecularLighting><feColorMatrix type='saturate' values='0' x='0%' y='0%' width='100%' height='100%' in='specularLighting' result='colormatrix'></feColorMatrix></filter></defs><rect width='700' height='700' fill='transparent'></rect><rect width='700' height='700' fill='%23ff0000' filter='url(%23nnnoise-filter)'></rect></svg>");
+  background-blend-mode: color-dodge;
+}
+
+.lid .text {
+  color: darkred;
+  font-size: 48px;
+  font-family: sans-serif;
+  user-select: none;
+  text-shadow: -1px -1px 0 #bbb, 1px -1px 0 #bbb, -1px 1px 0 #fff, 1px 1px 0 #bbb;
+  pointer-events: none; /* Ignore mouse events to drop mousedown interactions to the lid */
+}
